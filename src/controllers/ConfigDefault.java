@@ -1,10 +1,11 @@
 package controllers;
 
 import Models.Encrypt;
-import controllers.Encript;
 
 public class ConfigDefault {
 	
+	private static String [] responses;
+
 	static public String addDefaultEncrypt(int type, String key) {
 		
 		Encrypt encrypter = new Encrypt(type, key);
@@ -17,16 +18,15 @@ public class ConfigDefault {
 	
 	public static String [] defaultEncrypt() {
 		
-		String [] response = {};
+		responses = new String [2];
 		String textoCompleto = Archiver.lerArchiver("src/data/Encrypt.txt");
+			
+		Encrypt obj = new Encrypt(new json.JSONObject(textoCompleto));
+				
+		responses[0] = Integer.toString(obj.getType());
+		responses[1] = obj.getKey();
 		
-		json.JSONObject jO = new json.JSONObject(textoCompleto);		
-		Encrypt obj = (Encrypt) jO.get("Encrypt");
-		
-		response[0] = Integer.toString(obj.getType());
-		response[1] = obj.getKey();
-		
-		return response;
+		return responses;
 	}
 	
 	public static String encryptMessage(String request) {
@@ -35,7 +35,7 @@ public class ConfigDefault {
 		String textoCompleto = Archiver.lerArchiver("src/data/Encrypt.txt");
 		
 		json.JSONObject jO = new json.JSONObject(textoCompleto);		
-		Encrypt obj = (Encrypt) jO.get("Encrypt");
+		Encrypt obj = new Encrypt(jO);
 		
 		
 		switch (obj.getType()){
@@ -62,7 +62,7 @@ public class ConfigDefault {
 		String textoCompleto = Archiver.lerArchiver("src/data/Encrypt.txt");
 		
 		json.JSONObject jO = new json.JSONObject(textoCompleto);		
-		Encrypt obj = (Encrypt) jO.get("Encrypt");
+		Encrypt obj = new Encrypt(jO);
 		
 		
 		switch (obj.getType()){

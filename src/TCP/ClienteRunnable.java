@@ -26,15 +26,12 @@ public class ClienteRunnable implements Runnable{
 				try {	
 					
 					s = new Scanner(cliente.getInputStream());
-					String mensagem;
-					//String [] msg;
+					String response;
 					
 					while(s.hasNextLine()){
-						mensagem = s.nextLine();
+						response = s.nextLine();
 	
-						mensagem = Encript.decriptarCifraCesar(3, mensagem);
-						
-									
+						System.out.println(ConfigDefault.decryptMessage(response));									
 					}
 				} catch (IOException e) {
 					e.printStackTrace();

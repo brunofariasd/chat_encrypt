@@ -18,8 +18,8 @@ public class Encrypt implements Serializable{
 	}
 	
 	public Encrypt(JSONObject j) {
-		this.type = j.getInt("type");
-		this.key = j.getString("key");
+		this.type = j.getJSONObject("Encrypt").getInt("type");
+		this.key = j.getJSONObject("Encrypt").getString("key");
 	}
 	
 	public json.JSONObject toJson() {

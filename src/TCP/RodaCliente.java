@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-import Models.Encrypt;
+import controllers.ConfigDefault;
 
 public class RodaCliente {
 	
@@ -31,24 +31,17 @@ public class RodaCliente {
 				}
 			}});
 		escutarServidor.start();
+		
+		System.out.println("Chat Iniciado...");
 		while(true) {
 			
-			System.out.print(">>");
+			System.out.print(">> ");
 			msg = sc.nextLine();
-			
-			//msg = Encrypt.
-			
-			//c.enviarMensagem(msg);
+			c.enviarMensagem(ConfigDefault.encryptMessage(msg));
 		}
 		/*
 		 * HERE
 		 */
-	}
-	
-	public static String [] msgSeparada(String msg) {
-		
-		String [] arrayString = msg.split(";");
-		return arrayString;
 	}
 	
 	public static void main(String args[]) throws UnknownHostException, IOException {

@@ -14,7 +14,6 @@ public class Servidor implements Runnable{
 	public Socket client;
 	static String [] defaultEncryption = ConfigDefault.defaultEncrypt();
 	public static ArrayList<Socket> clientsConecteds = new ArrayList<Socket>();
-	public static ArrayList<String> schedules = new ArrayList<String>();
 		
 	public Servidor(Socket cliente) throws IOException{
 		this.client = cliente;	
@@ -27,26 +26,16 @@ public class Servidor implements Runnable{
 			Scanner s = null;
 			s = new Scanner(this.client.getInputStream());
 			String rcv;
-			String [] response;
+			String response;
 			
 			while(s.hasNextLine()){
 				rcv = s.nextLine();
-				response = msgSeparada(rcv);
+				response = ConfigDefault.decryptMessage(rcv);
 				System.out.println("Texto encriptado >> "+ rcv);
-				switch(Integer.parseInt(response[0])) {
-				case 1: 
-					enviarMensagemBroadcast(response[2]);
-					System.exit(0);
-					break;
-				case 2:
-					enviarMensagemBroadcast(response[2]);
-					break;
-				case 3:
-					enviarMensagemBroadcast(response[2]);
-					break;
-			}
-				rcv = Encript.decriptarCifraCesar(3, rcv);
-				System.out.println("Texto decriptado >> "+ rcv);
+				
+				enviarMensagemBroadcast(response);
+				
+				System.out.println("Texto decriptado >> "+ response);
 				
 				//RN
 			}
@@ -74,12 +63,5 @@ public class Servidor implements Runnable{
 				System.out.println(ex.getMessage());
 			}
 		}
-	 }
- 
-	public static String [] msgSeparada(String msg) {
-		
-		String [] arrayString = msg.split(";");
-		return arrayString;
-	}
- 
+	 } 
 }
