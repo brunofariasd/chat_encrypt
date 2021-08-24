@@ -6,7 +6,6 @@ import java.net.Socket;
 import java.util.Scanner;
 
 import controllers.ConfigDefault;
-import controllers.Encript;
 
 public class ClienteRunnable implements Runnable{
 
@@ -45,7 +44,7 @@ public class ClienteRunnable implements Runnable{
 
 	public void enviarMensagem(String mensagem) throws IOException {
 		PrintStream saida = new PrintStream(cliente.getOutputStream());
-		saida.println(Encript.encriptarCifraCesar(3,mensagem));
+		saida.println(ConfigDefault.encryptMessage(mensagem));
 	}
 	
 	public void encerrarConexao() throws IOException {

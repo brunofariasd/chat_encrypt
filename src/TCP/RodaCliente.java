@@ -5,8 +5,6 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
-import controllers.ConfigDefault;
-
 public class RodaCliente {
 	
 	String msg;
@@ -37,7 +35,7 @@ public class RodaCliente {
 			
 			System.out.print(">> ");
 			msg = sc.nextLine();
-			c.enviarMensagem(ConfigDefault.encryptMessage(msg));
+			c.enviarMensagem(msg);
 		}
 		/*
 		 * HERE

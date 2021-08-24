@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import controllers.ConfigDefault;
-import controllers.Encript;
 
 public class Servidor implements Runnable{
 	
@@ -49,14 +48,14 @@ public class Servidor implements Runnable{
  
 	 public void enviarMensagem(String mensagem) throws IOException{
 			PrintStream saida = new PrintStream(client.getOutputStream());
-			saida.println(Encript.encriptarCifraCesar(3,mensagem));
+			saida.println(ConfigDefault.encryptMessage(mensagem));
 	 }
  
 	 public static void enviarMensagemBroadcast(String mensagem) throws IOException {
 		for (int counter = 0; counter < clientsConecteds.size(); counter++) {
 			try{
 				PrintStream saida = new PrintStream(clientsConecteds.get(counter).getOutputStream());
-				saida.println(Encript.encriptarCifraCesar(3,mensagem));
+				saida.println(ConfigDefault.encryptMessage(mensagem));
 			} catch(Exception ex){
 			    /*client.remove*/
 				clientsConecteds.remove(counter);
